@@ -1,0 +1,29 @@
+(必做） 根据上述自己对于 1 和 2 的演示，写一段对于不同 GC 的总结，提交到 Github。
+
+Serial，单线程收集垃圾，在工作时会暂停所有的工作线程，只在单核CPU的机器上适合使用；
+
+ParNew，多线程收集垃圾，除此之外，其余的行为、特点和Serial收集器一样，在多核CPU下比Serial收集器有优势；
+
+Parallel Scavenge，并行收集垃圾，JDK8中默认的垃圾收集器，更侧重于系统的吞吐量，而不是用户线程的停顿时间，这点较CMS不同，在堆内存分配较小的情况下，其吞吐量可能较CMS稍低，可是在堆内存足够大之后，比CMS具有明显的优势；
+
+CMS,并发标记清除，属于老年代垃圾回收器，垃圾回收分为6个阶段，只在初始标记、重新标记这两个阶段会发生STW，其它阶段都是与用户线程并发执行，因而减少用户线程的停顿时间，使程序更平稳，更关注于用户线程的停顿时间，后面一些高级的垃圾回收器都是基于CMS作为基础来设计并实现；
+
+G1，Garbage First，JDK9开始默认的垃圾回收器，同样采用分代收集算法，不再将堆内存分为年轻代和老年代，而是划分为2048个内存大小相同的region，G1不必每次都去回收整个堆空间，而是根据设置的停顿时间，优先去回收垃圾最多的region区，这个停顿时间也需要设置合理，如果过短，那么会导致频繁的垃圾回收。
+
+
+
+(必做）写一段代码，使用 HttpClient 或 OkHttp 访问 http://localhost:8801 ，代码提交到 Github。
+   ---->HttpClientDemo.java
+   ---->log4j.properties
+   ---->dependency
+ <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+            <version>5.0.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+        </dependency>
